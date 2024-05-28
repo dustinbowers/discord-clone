@@ -32,12 +32,6 @@ export default function RootLayout({
           font.className,
           "bg-white dark:bg-[#313338]"
         )}>
-          {/* <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn> */}
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
