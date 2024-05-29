@@ -1,25 +1,53 @@
 "use client";
 
 import { useModal } from "@/hooks/use-modal-store";
+import { currentProfile } from "@/lib/current-profile";
+import { db } from "@/lib/db";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-const ServerIdPage = () => {
-    const { onOpen, isOpen, onClose, type, data } = useModal();
+interface ServerIdPageProps {
+    params: {
+        serverId: string;
+    }
+};
 
-    return (
-        <div>
-            Server ID Page
-            <ul>
-                <li>isOpen: {JSON.stringify(isOpen)}</li>
-                <li>type: {type}</li>
-                <li>data:
-                    <pre dangerouslySetInnerHTML={{
-                        __html:
-                            JSON.stringify(data, null, 2)
-                    }} />
-                </li>
-            </ul>
-        </div>
-    );
+const ServerIdPage = async ({
+    params
+}: ServerIdPageProps) => {
+    const profile = await currentProfile();
+    if (!profile) {
+        return auth().redirectToSignIn();
+    }
+
+    const server = await db.server.findUnique({
+        where: {
+            id: params.serverId,
+            members: {
+                some: {
+                    profileId: profile.id,
+                }
+            }
+        },
+        include: {
+            channels: {
+                where: {
+                    name: "general"
+                },
+                orderBy: {
+                    createdAt: "asc"
+                }
+            }
+        }
+    })
+
+    const initialChannel = server?.channels[0];
+
+    if (initialChannel?.name !== "general") {
+        return null;
+    }
+
+    return redirect(`/servers/${params.serverId}/channels/${initialChannel?.id}`)
 }
 
 export default ServerIdPage;
