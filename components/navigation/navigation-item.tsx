@@ -27,7 +27,6 @@ export const NavigationItem = ({
             side="right"
             align="center"
             label={name}
-
         >
             <button
                 onClick={() => { onClick() }}
