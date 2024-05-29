@@ -11,7 +11,12 @@ const ServerIdPage = () => {
             <ul>
                 <li>isOpen: {JSON.stringify(isOpen)}</li>
                 <li>type: {type}</li>
-                <li>data: {JSON.stringify(data, null, 2)}</li>
+                <li>data:
+                    <pre dangerouslySetInnerHTML={{
+                        __html:
+                            JSON.stringify(data, null, 2)
+                    }} />
+                </li>
             </ul>
         </div>
     );
