@@ -2,9 +2,9 @@
 
 import { ServerWithMembersWithProfiles } from "@/types";
 import { MemberRole } from "@prisma/client";
-import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
-import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
+// import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { useModal } from "@/hooks/use-modal-store";
 
 interface ServerHeaderProps {
@@ -28,7 +28,7 @@ export const ServerHeader = ({
                 asChild
             >
                 <button
-                    className="w-full text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2 hover:bg-zinc-700/10 dark:hover:bg-zing-700/50 transition"
+                    className="w-full text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2 hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition"
                 >
                     {server.name}
                     <ChevronDown className="h-5 w-5 ml-auto" />
