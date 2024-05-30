@@ -26,7 +26,7 @@ export default clerkMiddleware((auth, request) => {
     if (!isPublicRoute(request)) {
         auth().protect();
     }
-}, { debug: true });
+}, { debug: false });
 
 export const config = {
     // The following matcher runs middleware on all routes
