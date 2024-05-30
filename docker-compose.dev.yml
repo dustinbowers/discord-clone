@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  chat.chronx.dev:
+    container_name: chat.chronx.dev
+    build:
+      context: ./next-app
+      dockerfile: dev.Dockerfile
+    environment:
+      ENV_VARIABLE: ${ENV_VARIABLE}
+      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    env_file:
+      - .env
+    volumes:
+      - ./next-app/src:/app/src
+      - ./next-app/public:/app/public
+    restart: always
+    ports:
+      - "127.0.0.1:444:3000"
+    networks:
+      - chronx-dev-network
+
+networks:
+  chronx-dev-network:
+    external: true
