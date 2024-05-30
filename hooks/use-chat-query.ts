@@ -31,6 +31,8 @@ export const useChatQuery = ({
         return res.json();
     };
 
+    // TODO: figure out this type problem
+    // with this "getNextPageParam" value...
     const {
         data,
         fetchNextPage,
@@ -40,7 +42,7 @@ export const useChatQuery = ({
     } = useInfiniteQuery({
         queryKey: [queryKey],
         queryFn: fetchMessages,
-        getNextPageParam: fetchMessages,
+        getNextPageParam: (lastPage) => lastPage?.nextCursor,
         refetchInterval: isConnected ? false : 1000
     })
 
