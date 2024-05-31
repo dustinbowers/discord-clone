@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { useModal } from "@/hooks/use-modal-store";
 import { currentProfile } from "@/lib/current-profile";
